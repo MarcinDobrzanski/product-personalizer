@@ -7,9 +7,10 @@ const Products = () => {
 
   return (
     <section>
-      {products.map(products => <Product key={products.id} />)}
+      {products.map(products => <Product key={products.id} name={products.name} title={products.title} colors={products.colors} sizes={products.sizes} basePrice={products.basePrice} />)}
     </section>
   );
 };
+
 
 export default Products;
