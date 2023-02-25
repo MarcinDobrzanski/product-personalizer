@@ -1,6 +1,6 @@
 import styles from './Product.module.scss';
 import clsx from 'clsx';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
 const Product = products => {
@@ -48,8 +48,13 @@ const Product = products => {
 };
 
 
-// Product.propTypes = {
-
-// };
+Product.propTypes = {
+  products: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    basePrice: PropTypes.number.isRequired,
+    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
 
 export default Product;
