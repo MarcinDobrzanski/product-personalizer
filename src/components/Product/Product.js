@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const Product = products => {
+const Product = products  => {
 
 
 
@@ -13,7 +13,7 @@ const Product = products => {
         <img
           className={styles.image}
           alt="Kodilla shirt"
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--black.jpg`} />
+          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--${products.colors}.jpg`} />
       </div>
       <div>
         <header>
