@@ -13,7 +13,7 @@ const Product = products  => {
         <img
           className={styles.image}
           alt="Kodilla shirt"
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--${products.colors}.jpg`} />
+          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--${products.currentColor}.jpg`} />
       </div>
       <div>
         <header>
@@ -51,6 +51,7 @@ const Product = products  => {
 Product.propTypes = {
   products: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    currentColor: PropTypes.string.isRequired,
     basePrice: PropTypes.number.isRequired,
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
