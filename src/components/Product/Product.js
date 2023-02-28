@@ -19,6 +19,14 @@ const Product = props => {
     return props.basePrice + additionalPrice;
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('Summary:');
+    console.log('Price:', getPrice());
+    console.log('Size:', currentSize);
+    console.log('Color:', currentColor);
+  };
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -32,7 +40,7 @@ const Product = props => {
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
@@ -53,7 +61,7 @@ const Product = props => {
               )}
             </ul>
           </div>
-          <Button className={styles.button}>
+          <Button className={styles.button} type="submit" >
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
