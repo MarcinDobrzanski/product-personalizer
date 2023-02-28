@@ -11,7 +11,13 @@ const Product = props => {
 
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-  }
+  };
+
+  const getPrice = () => {
+    const size = props.sizes.find((item) => item.name === currentSize);
+    const additionalPrice = size ? size.additionalPrice : 0;
+    return props.basePrice + additionalPrice;
+  };
 
   return (
     <article className={styles.product}>
@@ -24,7 +30,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>{props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
@@ -57,15 +63,19 @@ const Product = props => {
 };
 
 
-Product.propTypes = {
 
+Product.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired,
-  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string, additionalPrice: PropTypes.number })).isRequired,
-
+  colors: PropTypes.arrayOf(PropTypes.string),
+  sizes: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      additionalPrice: PropTypes.number,
+    })
+  ),
 };
 
 export default Product;
