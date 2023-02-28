@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import products from '../../data/products';
 import Product from '../Product/Product';
 

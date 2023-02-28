@@ -6,7 +6,12 @@ import { useState } from 'react';
 
 const Product = props => {
 
-  const [currentColor, setCurrentColor] = useState(props.colors[0])
+  const [currentColor, setCurrentColor] = useState(props.colors[0]);
+  const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
+  // console.log('currentSize', currentSize);
+  console.log('props', props);
+  console.log('props.sizes', props.sizes);
+
 
   return (
     <article className={styles.product}>
@@ -25,18 +30,19 @@ const Product = props => {
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
-              <li><button type="button" className={styles.active}>S</button></li>
-              <li><button type="button">M</button></li>
-              <li><button type="button">L</button></li>
-              <li><button type="button">XL</button></li>
+              {props.sizes.map(item =>
+                <li key={item.name}>
+                  <button type="button" className={clsx(currentSize === item.name && styles.active)}>{item.name}</button>
+                </li>
+              )}
             </ul>
           </div>
           <div className={styles.colors}>
             <h3 className={styles.optionLabel}>Colors</h3>
             <ul className={styles.choices}>
-              <li><button type="button" className={clsx(styles.colorBlack, styles.active)} /></li>
-              <li><button type="button" className={clsx(styles.colorRed)} /></li>
-              <li><button type="button" className={clsx(styles.colorWhite)} /></li>
+              <li><button type="button" className={clsx(styles.colorBlack, currentColor === 'black' && styles.active)} /></li>
+              <li><button type="button" className={clsx(styles.colorRed, currentColor === 'black' && styles.active)} /></li>
+              <li><button type="button" className={clsx(styles.colorWhite, currentColor === 'black' && styles.active)} /></li>
             </ul>
           </div>
           <Button className={styles.button}>
@@ -56,7 +62,7 @@ Product.propTypes = {
   title: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.shape({name: PropTypes.string, additionalPrice: PropTypes.number})).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string, additionalPrice: PropTypes.number })).isRequired,
 
 };
 
