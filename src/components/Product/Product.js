@@ -2,10 +2,11 @@ import styles from './Product.module.scss';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import { useState } from 'react';
 
-const Product = products  => {
+const Product = props => {
 
-
+  const [currentColor, setCurrentColor] = useState(props.colors[0])
 
   return (
     <article className={styles.product}>
@@ -13,12 +14,12 @@ const Product = products  => {
         <img
           className={styles.image}
           alt="Kodilla shirt"
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-kodilla--${products.currentColor}.jpg`} />
+          src={`${process.env.PUBLIC_URL}/images/products/shirt-${props.name}--${currentColor}.jpg`} />
       </div>
       <div>
         <header>
-          <h2 className={styles.name}>{products.title}</h2>
-          <span className={styles.price}>{products.basePrice}$</span>
+          <h2 className={styles.name}>{props.title}</h2>
+          <span className={styles.price}>{props.basePrice}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
@@ -49,13 +50,14 @@ const Product = products  => {
 
 
 Product.propTypes = {
-  products: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    currentColor: PropTypes.string.isRequired,
-    basePrice: PropTypes.number.isRequired,
-    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  basePrice: PropTypes.number.isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.shape({name: PropTypes.string, additionalPrice: PropTypes.number})).isRequired,
+
 };
 
 export default Product;
