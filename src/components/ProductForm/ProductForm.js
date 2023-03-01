@@ -1,9 +1,9 @@
 import styles from './ProductForm.module.scss';
 import Button from '../Button/Button';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 const ProductForm = props => {
-  console.log('props', props);
 
   const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
@@ -36,6 +36,21 @@ const ProductForm = props => {
       </Button>
     </form>
   );
+};
+
+ProductForm.propTypes = {
+  currentColor: PropTypes.string.isRequired,
+  setCurrentColor: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  currentSize: PropTypes.string.isRequired,
+  setCurrentSize: PropTypes.func.isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string),
+  sizes: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      additionalPrice: PropTypes.number,
+    })
+  ),
 };
 
 export default ProductForm;
